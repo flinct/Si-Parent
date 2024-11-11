@@ -8,13 +8,17 @@ module.exports = defineConfig({
   responseTimeout:30000,//timeout untuk menunggu respons dari server
 
   e2e: {
-    // baseUrl: 'https://dev.satuinbox.com',//dev
-    // baseUrl: 'https://sap.satuinbox.com',//prod (sap)
     baseUrl: baseUrl,
     experimentalStudio: true,
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
       // implement node event listeners here
+      on('task', {
+        log(message) {
+          console.log(message);
+          return null;
+        }
+      });
     },
   },
   "reporter":"cypress-mochawesome-reporter",
